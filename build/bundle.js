@@ -76,16 +76,23 @@ var _express2 = _interopRequireDefault(_express);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import proxy from 'express-http-proxy';
 var app = (0, _express2.default)();
 
-app.get('/', function (req, res) {
-    res.send('Server is RUNNING ..');
+// app.use('/graphql',
+//     proxy('http://localhost:4000/graphql')
+// )
+
+app.use(_express2.default.static("public"));
+
+app.get("*", function (req, res) {
+  res.send("\n        <!DOCTYPE html>\n        <html>\n        <head>\n            <title>Apollo Client App</title>\n        </head>\n        <body>\n        <div id=\"root\"></div>\n        <script src=\"bundle.js\"></script>\n        </body>\n        </html>\n\n        ");
 });
 
 var PORT = process.env.PORT || 3100;
 
 app.listen(PORT, function () {
-    console.log('Server is running on port ' + PORT);
+  console.log("Server is running on port " + PORT);
 });
 
 /***/ }),
