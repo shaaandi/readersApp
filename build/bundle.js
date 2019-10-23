@@ -83,13 +83,19 @@ var app = (0, _express2.default)();
 //     proxy('http://localhost:4000/graphql')
 // )
 
-app.use(_express2.default.static("public"));
-
-app.get("*", function (req, res) {
-  res.send("\n        <!DOCTYPE html>\n        <html>\n        <head>\n            <title>Apollo Client App</title>\n        </head>\n        <body>\n        <div id=\"root\"></div>\n        <script src=\"bundle.js\"></script>\n        </body>\n        </html>\n\n        ");
+app.use(_express2.default.static("public"), function (req, res, next) {
+  console.log("Not Found");
+  console.log(req.path);
+  next();
 });
 
+// setting enviroment variables ;
 var PORT = process.env.PORT || 3100;
+var DOMAIN = process.env.DOMAIN || "http://localhost:" + PORT + "/";
+
+app.get("*", function (req, res) {
+  res.send("\n        <!DOCTYPE html>\n        <html>\n        <head>\n            <title>Gt. Times</title>\n            <!--Import Google Icon Font-->\n             <base href=" + DOMAIN + "/>\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n            <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n            <link href=\"https://fonts.googleapis.com/css?family=Cinzel+Decorative|Jomolhari&display=swap\" rel=\"stylesheet\">\n            <!--Import materialize.css-->\n            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/materialize.min.css\"  media=\"screen,projection\"/>\n            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/custom.css\"  media=\"screen,projection\"/>\n            <!--Let browser know website is optimized for mobile-->\n            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n        </head>\n        <body>\n        <div id=\"root\"></div>\n        <script type=\"text/javascript\" src=\"js/materialize.min.js\"></script>\n        <script src=\"main.bundle.js\" ></script>\n        </body>\n        </html>\n\n        ");
+});
 
 app.listen(PORT, function () {
   console.log("Server is running on port " + PORT);

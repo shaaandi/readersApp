@@ -1,43 +1,19 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { renderRoutes } from "react-router-config";
 import { Link } from "react-router-dom";
+import Header from "./components/Header";
 
-const Header = () => {
+function App(props) {
+  let [onMount] = useState(0);
+  let { route, location } = props;
+  useEffect(() => {
+    // adding materialize image media listenier
+  }, [onMount]);
   return (
-    <div>
-      Header
-      <Link to="/login">Login</Link>
-    </div>
-  );
-};
-
-let query = gql`
-  {
-    article(id: "5da1df05f5e2f30b4c529e75") {
-      title
-      content
-      authorId {
-        username
-      }
-    }
-  }
-`;
-
-let CURRENT_USER = gql`
-  {
-    currentUser {
-      id
-      badge
-    }
-  }
-`;
-
-function App({ route }) {
-  return (
-    <div>
-      <Header />
+    <div className="container-fluid">
+      <Header currentUser={true} location={location} />
       {renderRoutes(route.routes)}
     </div>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { fetchHeadlines, fetchEditorsPick } from "../queries/mainPage/index";
 import { useQuery } from "@apollo/react-hooks";
+import Section1 from "../components/mainPage/section1";
 
 function MainPage() {
   let {
@@ -18,8 +19,20 @@ function MainPage() {
     headlines,
     editorsPick
   });
-  if (fetchHeadlinesLoading) return <div>Loading</div>;
-  return <div>Fetched DATA Completed</div>;
+  if (fetchHeadlinesLoading || fetchEditorsPickLoading)
+    return (
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    );
+  return (
+    <div className="container-fluid">
+      <Section1
+        headlines={headlines.fetchMainTemplete}
+        editorsPick={editorsPick.fetchMainTemplete.editorsPick}
+      />
+    </div>
+  );
 }
 
 export default MainPage;

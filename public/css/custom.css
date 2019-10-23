@@ -1,0 +1,398 @@
+#sidenav-toggler {
+  background: transparent;
+  border: none;
+  color: whitesmoke;
+}
+
+#custom-loader {
+  position: absolute;
+  /* top: 0; */
+  width: 100%;
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#custom-loader .progress {
+  flex-basis: 40%;
+}
+
+#gothamTimesLogo {
+  font-family: "Jomolhari", serif;
+}
+
+#nav-extended-custom {
+  background-color: #3a3030;
+}
+
+@media only screen and (min-width: 993px) {
+  #sidenav-toggler {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #gothamTimesLogo {
+    font-size: 1.7rem;
+  }
+}
+
+/* The side navigation menu */
+.sidenav-w {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #3a3030; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav-w a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav-w a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav-w .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left 0.5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav-w {
+    padding-top: 15px;
+  }
+  .sidenav-w a {
+    font-size: 18px;
+  }
+}
+
+/*  mainPage styling */
+/* section 1 styling */
+#mobile-main-sec1-hd1 {
+  cursor: pointer;
+}
+
+.main-sect1-h1-img {
+  width: 500px;
+}
+
+.border-seperator-horizontal {
+  margin: 10px;
+  background-color: gray;
+}
+
+.right-border-seperator {
+  border-right: solid 0.8px gray;
+}
+
+.left-border-seperator-main {
+  border-left: solid 1px gray;
+}
+
+.gray {
+  color: gray;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.zero-margin {
+  margin: 0;
+}
+
+.section-side-heading {
+  font-size: large;
+  font-weight: bold;
+  /* text-decoration: underline; */
+  text-decoration: underline;
+}
+
+/* .side-section-card {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: solid 0.3px;
+} */
+
+#side-section-card-left {
+  padding: 10px 0;
+}
+
+.side-section-card p {
+  margin: 1px;
+}
+
+/* mobile styling */
+@media only screen and (max-width: 600px) {
+  /* here style goes  .. */
+  #mobile-main-sec1-hd1-img {
+    width: 100%;
+  }
+
+  #mobile-main-sec1-hd1-h {
+    font-weight: bold;
+    color: gray;
+  }
+
+  #mobile-main-sec1-hd1-p {
+    font-size: 18px;
+    margin: 4px 0;
+  }
+
+  #mobile-main-sec1-hd2-img {
+    width: 100%;
+  }
+
+  #mobile-main-sec1-hd2-h {
+    font-weight: bold;
+    color: gray;
+  }
+
+  #mobile-main-sec1-hd2-p {
+    font-size: 18px;
+  }
+
+  #mobile-main-sec1-hd3-h {
+    font-weight: bold;
+    color: gray;
+  }
+
+  #mobile-main-sec1-hd3-p {
+    font-size: 18px;
+    margin: 4px 0;
+  }
+
+  #mobile-main-sec1-hd4-h {
+    font-weight: bold;
+    color: gray;
+  }
+
+  #mobile-main-sec1-hd4-p {
+    font-size: 18px;
+    margin: 4px 0;
+  }
+  #mobile-main-sec1-hd5-h {
+    font-weight: bold;
+    color: gray;
+  }
+
+  #mobile-main-sec1-hd5-p {
+    font-size: 18px;
+    margin: 4px 0;
+  }
+
+  #mobile-main-sec1-editorsPick-title {
+    font-size: 20px;
+  }
+
+  #mobile-main-sec1-editorsPick-p {
+    font-size: 19px;
+  }
+
+  #mobile-main-sec1-editorsPick-img {
+    display: none;
+  }
+
+  #mobile-main-sec1-editorsPick-heading {
+    font-size: x-large;
+  }
+}
+
+/* end mobile styling */
+/* /*** end sect 1 */
+/* /*** end main styling */
+
+/* /*  category Page styles  */
+
+/*  end category page stylees*/
+
+/* /* article Page styling  */
+.article-header-likesAndComment {
+  margin: 5px;
+}
+
+#article-header-topCount {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.articleContent-para {
+  font-size: 18px;
+  font-weight: normal;
+  font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif;
+  margin: 1.2rem 0;
+}
+
+/* ---------------articleComments */
+.articleComments-sideNav {
+  /* custom styles and removing padidng custom */
+  display: flex;
+  flex-direction: column;
+
+  /* end custom styles */
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  right: 0;
+  background-color: #6a987f; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  /* padding-top: 60px; Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+#articleComments-loading {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+#commentsTopButtons {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  align-items: center;
+}
+
+.commentsTopButtonHeader {
+  flex-grow: 1;
+}
+
+.commentsTopButton {
+  padding: 5px;
+  font-size: x-large;
+  color: white;
+}
+
+.articleComments-sideNav .close-button {
+  border: none;
+  background: none;
+  color: white;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.articleComments-sideNav .close-button:hover {
+  background: #f44336;
+}
+
+@media screen and (max-height: 450px) {
+  .articleComments-sideNav {
+    padding-top: 15px;
+  }
+}
+
+/* Article Comments Box styling start */
+.tip {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  background: transparent;
+  border: 10px solid #ccc;
+}
+
+.tip-left {
+  top: 10px;
+  left: -25px;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.dialogbox .body {
+  position: relative;
+  max-width: 400px;
+  height: auto;
+  margin: 20px 10px;
+  padding: 5px;
+  background-color: #dadada;
+  border-radius: 3px;
+  border: 5px solid #ccc;
+  flex-grow: 1;
+}
+
+.body .message {
+  min-height: 30px;
+  border-radius: 3px;
+  font-family: Arial;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #797979;
+}
+
+#commentsDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.dialogbox {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.dialogbox img {
+  border-radius: 50%;
+}
+
+.dialogbox .imgDiv {
+  margin: 20px 10px;
+}
+
+/* end Article Comment Box styling*/
+
+/* article Add Comment Styling  */
+#addComment {
+  /* custom styles */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  width: 100%;
+  height: auto;
+  transform: translateX(-500px);
+}
+
+#addCommentForm {
+  width: 100%;
+  flex-grow: 1;
+}
+
+#addCommentForm-form {
+  padding: 0;
+}
+
+/* end Article Comment Stying */
+
+/* end article page styling */

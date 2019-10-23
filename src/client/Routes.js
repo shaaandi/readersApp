@@ -1,6 +1,10 @@
 import React from "react";
 import App from "./App";
 import MainPage from "./pages/MainPage";
+import CategoryPage from "./pages/CategoryPage";
+import ArticlePage from "./pages/ArticlePage";
+import ArticleComments from "./components/articlePage/articleComments";
+import AddComment from "./components/articlePage/articleAddComment";
 
 const Login = () => {
   return (
@@ -18,12 +22,34 @@ export default [
     routes: [
       {
         component: Login,
-        path: "/login"
+        path: "/login",
+        exact: true
       },
       {
         component: MainPage,
         path: "/",
         exact: true
+      },
+      {
+        component: CategoryPage,
+        path: "/:category",
+        exact: true
+      },
+      {
+        component: ArticlePage,
+        path: "/article/:articleId",
+        routes: [
+          {
+            component: ArticleComments,
+            path: "/article/:articleId/comments",
+            routes: [
+              {
+                component: AddComment,
+                path: "/article/:articleId/comments/addComment"
+              }
+            ]
+          }
+        ]
       }
     ]
   }

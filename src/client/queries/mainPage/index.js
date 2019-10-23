@@ -6,6 +6,7 @@ module.exports = {
       fetchMainTemplete {
         headline1 {
           title
+          content
           id
           authorId {
             username
@@ -16,6 +17,7 @@ module.exports = {
         }
         headline2 {
           title
+          content
           id
           authorId {
             username
@@ -26,6 +28,7 @@ module.exports = {
         }
         headline3 {
           title
+          content
           id
           authorId {
             username
@@ -36,6 +39,7 @@ module.exports = {
         }
         headline4 {
           title
+          content
           id
           authorId {
             username
@@ -46,6 +50,7 @@ module.exports = {
         }
         headline5 {
           title
+          content
           id
           authorId {
             username
@@ -63,6 +68,11 @@ module.exports = {
         editorsPick {
           title
           id
+          content
+          createdAt
+          authorId {
+            username
+          }
         }
       }
     }
