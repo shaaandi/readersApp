@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { withRouter, Link } from "react-router-dom";
-import { useLazyQuery, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 // import { fetchComments } from "../../queries/articlePage/comments";
 import { fetchComments } from "../../queries/articlePage/comments";
+import { deleteComment } from "../../mutations/article/comment";
 import { renderRoutes } from "react-router-config";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,11 +12,47 @@ import { faFeather } from "@fortawesome/free-solid-svg-icons";
 function handleCloseComments(articleId, history) {
   document.getElementById("articleComments").style.width = "0";
   setTimeout(() => {
-    history.push(`/article/${articleId}`);
+    history.go(-1);
   }, 500);
 }
 
-function renderComments({ comments }) {
+function commentsAuthorizedButtons({
+  comment,
+  user,
+  mutateDeleteComment,
+  articleId
+}) {
+  if (!user) return;
+  if (comment.readerId.id === user.id) {
+    return (
+      <div className="right-align">
+        <i
+          onClick={() => {
+            mutateDeleteComment({
+              variables: {
+                input: { id: comment.id }
+              },
+              awaitRefetchQueries: true,
+              refetchQueries: [
+                {
+                  query: fetchComments,
+                  variables: {
+                    id: articleId
+                  }
+                }
+              ]
+            });
+          }}
+          class="material-icons"
+        >
+          delete
+        </i>
+      </div>
+    );
+  }
+}
+
+function renderComments({ comments, user, mutateDeleteComment, articleId }) {
   return comments.map(comment => {
     return (
       <div class="dialogbox">
@@ -34,6 +71,12 @@ function renderComments({ comments }) {
               {" "}
               @{comment.readerId.username}
             </Link>
+            {commentsAuthorizedButtons({
+              comment,
+              user,
+              mutateDeleteComment,
+              articleId
+            })}
           </div>
         </div>
       </div>
@@ -41,12 +84,11 @@ function renderComments({ comments }) {
   });
 }
 
-function ArticleComments({ match, history, route, deviceWidth }) {
+function ArticleComments({ match, history, route, deviceWidth, user }) {
   // COMMENTS
-  // The functionality about the upgrade of comments likes and repsonses and donw votes,
+  // The functionality about the upgrade of comments likes and, repsonses and donw votes,
   // wll be added later, and then useLazyQuery will be used to handle those refreshes,
   // END COMMENTS
-
   let [comments, setStateComments] = useState([]);
   let { articleId } = match.params;
   let [onlyOnce] = useState(0);
@@ -60,6 +102,18 @@ function ArticleComments({ match, history, route, deviceWidth }) {
       }
     }
   );
+
+  // defining deleteComment mutation and passind down to render comments
+  // and then deleteComment function;
+  let [
+    mutateDeleteComment,
+    {
+      data: deleteCommentResponse,
+      loading: deleteCommentLoading,
+      error: deleteCommentError
+    }
+  ] = useMutation(deleteComment);
+
   useEffect(() => {
     if (deviceWidth > 1000) {
       document.getElementById("articleComments").style.width = "30%";
@@ -101,12 +155,26 @@ function ArticleComments({ match, history, route, deviceWidth }) {
       </Link> */}
       <div id="commentsTopButtons">
         <div className="commentsTopButton  commentsTopButtonHeader">
-          {useQData.article.comments.length} Comments
+          {useQData.article.article.comments.length} Comments
         </div>
-        <div className="commentsTopButton">
-          <Link to={`/article/${articleId}/comments/addComment`}>
-            <FontAwesomeIcon icon={faFeather} />
-          </Link>
+        <div
+          className={!user ? "commentsTopButton popLogin" : "commentsTopButton"}
+        >
+          {user ? (
+            <Link to={`/article/${articleId}/comments/addComment`}>
+              <FontAwesomeIcon icon={faFeather} />
+            </Link>
+          ) : (
+            <Link to={`/article/${articleId}/comments`} replace>
+              <FontAwesomeIcon icon={faFeather} />
+            </Link>
+          )}
+          <span
+            id="popLoginText-left"
+            className="addCommentpopLogin popLoginText"
+          >
+            <Link to="/auth/login">Login First</Link>
+          </span>
         </div>
         <div className="commentsTopButton">
           <button
@@ -117,9 +185,31 @@ function ArticleComments({ match, history, route, deviceWidth }) {
           </button>
         </div>
       </div>
+
       {renderRoutes(route.routes)}
       <div id="commentsDiv" className="container">
-        {renderComments({ comments: useQData.article.comments })}
+        {deleteCommentLoading ? (
+          <div id="custom-loader">
+            <div style={{ flexBasis: "100%" }} class="progress">
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+        ) : (
+          <div style={{ background: "transparent" }} id="custom-loader">
+            <div style={{ background: "transparent" }} class="progress">
+              <div
+                style={{ background: "transparent" }}
+                class="indeterminate"
+              ></div>
+            </div>
+          </div>
+        )}
+        {renderComments({
+          comments: useQData.article.article.comments,
+          user,
+          mutateDeleteComment,
+          articleId
+        })}
       </div>
     </div>
   );

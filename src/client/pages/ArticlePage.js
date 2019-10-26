@@ -9,10 +9,9 @@ import { useEffect, useState } from "react";
 import ArticleHeader from "../components/articlePage/articleHeader";
 import ArticleContent from "../components/articlePage/articleContent";
 
-function ArticlePage({ match, route }) {
+function ArticlePage({ match, route, user }) {
   let [width, setWidth] = useState(0);
   let [justOnMount] = useState(0);
-
   let { articleId } = match.params;
   let { data, loading, error } = useQuery(articleQuery, {
     variables: {
@@ -36,6 +35,8 @@ function ArticlePage({ match, route }) {
     };
   });
 
+  console.log(data, loading, error);
+
   if (loading) {
     return (
       <div id="custom-loader">
@@ -45,13 +46,19 @@ function ArticlePage({ match, route }) {
       </div>
     );
   }
-  let { article } = data;
+
+  let { article, isLiked } = data.article;
   return (
     <div className="row">
       <div className="col s12 m10 l8 xl8">
-        <ArticleHeader article={article} width={width} />
+        <ArticleHeader
+          article={article}
+          width={width}
+          isLiked={isLiked}
+          user={user}
+        />
         <ArticleContent article={article} />
-        {renderRoutes(route.routes, { deviceWidth: width })}
+        {renderRoutes(route.routes, { deviceWidth: width, user })}
       </div>
     </div>
   );

@@ -15,10 +15,6 @@ function MainPage() {
     error: fetchEditorsPickError
   } = useQuery(fetchEditorsPick);
 
-  console.log({
-    headlines,
-    editorsPick
-  });
   if (fetchHeadlinesLoading || fetchEditorsPickLoading)
     return (
       <div class="progress">

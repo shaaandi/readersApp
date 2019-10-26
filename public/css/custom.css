@@ -1,3 +1,9 @@
+#header-mobile-sidenav-closebtn {
+  background: none;
+  border: none;
+  color: white;
+}
+
 #sidenav-toggler {
   background: transparent;
   border: none;
@@ -43,7 +49,7 @@
   height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
+  z-index: 2; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #3a3030; /* Black*/
@@ -94,7 +100,15 @@
 
 /*  mainPage styling */
 /* section 1 styling */
-#mobile-main-sec1-hd1 {
+/* #mobile-main-sec1-hd1,
+#mobile-main-sec1-hd2,
+#mobile-main-sec1-hd3,
+#mobile-main-sec1-hd4,
+#mobile-main-sec1-hd5 {
+  cursor: pointer;
+} */
+
+.pointCursor {
   cursor: pointer;
 }
 
@@ -234,6 +248,70 @@
 /*  end category page stylees*/
 
 /* /* article Page styling  */
+
+/* #likeArticleLoading {
+  /* width: 20px; */
+/* } */
+
+/* loginPopUp */
+.popLogin {
+  position: relative;
+  display: inline-block; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.popLoginText {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+#popLoginText-top {
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+#popLoginText-left {
+  top: -5px;
+  right: 105%;
+}
+
+.addCommentpopLogin {
+  font-size: medium;
+}
+
+.popLogin:hover .popLoginText {
+  visibility: visible;
+}
+
+/* end loginPopup */
+
+#likeIcon {
+  cursor: pointer;
+}
+
+#article-comment-loader #article-comment-loader-progress {
+  flex-basis: 100%;
+}
+
+#hide-loader {
+  background: transparent;
+}
+
+#hide-loader-progress {
+  background: transparent;
+}
+
 .article-header-likesAndComment {
   margin: 5px;
 }
@@ -396,3 +474,145 @@
 /* end Article Comment Stying */
 
 /* end article page styling */
+
+/* author Page styling  */
+
+/* author header */
+#authorHeader {
+  background-color: #3a3030;
+}
+
+/* end author header */
+
+/* author about  */
+
+#authorAboutWrapper {
+  padding: 15px;
+}
+
+#authorAboutProfileImg {
+  display: flex;
+  justify-content: center;
+}
+
+#authorAboutProfileImg img {
+  border-radius: 50%;
+}
+
+.authorAboutInfo-info {
+  display: flex;
+}
+
+.authorAboutInfo-label {
+  flex-basis: 30%;
+  font-weight: bolder;
+}
+
+.authorAboutInfo-data {
+  flex-basis: 70%;
+}
+
+.authorAboutInfo-info {
+  background: #b5b5b5;
+  padding: 5px;
+  margin: 5px;
+}
+/* end author about */
+
+/* author article styling */
+
+/* testing material */
+
+/* end testing */
+
+.authorArticleWrapper {
+  border-bottom: solid 0.4px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.authorArticleWrapper:hover {
+  background-color: #8181812b;
+}
+
+/* end author styling */
+
+/* end author page styling */
+
+/*  login page styling,  */
+
+#loginFormWrapper {
+  width: 50%;
+}
+
+#signupFormWrapper {
+  width: 50%;
+}
+
+@media only screen and (max-width: 900px) {
+  #loginFormWrapper {
+    width: 75%;
+  }
+
+  #signupFormWrapper {
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #loginFormWrapper {
+    width: 90%;
+  }
+  #signupFormWrapper {
+    width: 90%;
+  }
+}
+
+.oauth-btn {
+  width: 100%;
+}
+
+#auth-form-link {
+  padding: 15px;
+}
+
+#auth-form-link a {
+  color: #3a3030;
+  font-weight: bold;
+}
+
+#auth-oauth-google {
+  background: #4285f4;
+}
+
+#auth-oauth-facebook {
+  background: #3c5a99;
+}
+
+.auth-oauth-wrapper {
+  padding: 15px;
+}
+
+#auth-form-header {
+  padding: 15px;
+}
+
+#auth-form {
+  padding: 15px;
+}
+
+#auth-form-submit {
+  background: #3a3030;
+}
+
+.authErrors {
+  color: red;
+}
+
+/* @media only screen and (max-width: 800) {
+  #loginFormWrapper {
+    width: 70%;
+  }
+} */
+
+/*  end login page styling */

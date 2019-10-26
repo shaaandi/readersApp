@@ -28,6 +28,7 @@ module.exports = {
   fetchCategoryLatest: gql`
     query FetchCategoryLatest($input: fetchCategoryTempleteInputType) {
       fetchCategoryLatest(input: $input) {
+        id
         title
         createdAt
         content

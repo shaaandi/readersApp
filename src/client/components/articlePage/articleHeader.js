@@ -2,14 +2,28 @@ import React from "react";
 import Moment from "react-moment";
 import "moment-timezone";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { useMutation } from "@apollo/react-hooks";
+import { likeArticle } from "./../../mutations/article/like";
+import { article as articleQuery } from "../../queries/articlePage";
 
-function ArticleHeader({ article, width }) {
+function ArticleHeader({ article, isLiked, user }) {
+  console.log(user, "article-header");
+  let [
+    mutateLikeArticle,
+    {
+      data: likeArticleResponse,
+      loading: likeArticleLoading,
+      error: likeArticleError
+    }
+  ] = useMutation(likeArticle);
+
   let {
     id: articleId,
     title,
     likes,
     comments,
-    authorId: { username, profileImg },
+    authorId: { username, profileImg, id: authorId },
     createdAt
   } = article;
   let profileImgStyle = {
@@ -20,6 +34,38 @@ function ArticleHeader({ article, width }) {
     fontWeight: "bold",
     color: "#ada2a2"
   };
+  let numberOfLikes = likes.length;
+  let iconStyle = {
+    color: "black"
+  };
+  if (likeArticleLoading) {
+    if (isLiked) {
+      numberOfLikes--;
+      iconStyle = {
+        color: "black",
+        cursor: "default"
+      };
+    } else {
+      numberOfLikes++;
+      iconStyle = {
+        color: "#039be5",
+        cursor: "default"
+      };
+    }
+  } else {
+    if (isLiked) {
+      numberOfLikes = likes.length;
+      iconStyle = {
+        color: "#039be5"
+      };
+    } else {
+      numberOfLikes = likes.length;
+      iconStyle = {
+        color: "black"
+      };
+    }
+  }
+
   return (
     <div className="col s12 m12 l12 xl12">
       <div className="col s12 m12 l12">
@@ -36,7 +82,7 @@ function ArticleHeader({ article, width }) {
             />
           </div>
           <div className="col s8 m8 l11" style={usernameStyle}>
-            @{username}
+            <Link to={`/author/${authorId}`}>@{username}</Link>
           </div>
         </div>
       </div>
@@ -48,10 +94,42 @@ function ArticleHeader({ article, width }) {
 
       <div className="col s6 m6 l5 " id="article-header-topCount">
         <div className="article-header-likesAndComment">
-          <span>{likes.length}</span>
+          <span>{numberOfLikes}</span>
         </div>
-        <div className="article-header-likesAndComment">
-          <i className="material-icons">thumb_up</i>
+        <div
+          className={
+            !user
+              ? "article-header-likesAndComment popLogin"
+              : "article-header-likesAndComment"
+          }
+        >
+          <i
+            id="likeIcon"
+            style={iconStyle}
+            onClick={() => {
+              if (!user) return false;
+              mutateLikeArticle({
+                variables: {
+                  input: { articleId }
+                },
+                awaitRefetchQueries: true,
+                refetchQueries: [
+                  {
+                    query: articleQuery,
+                    variables: {
+                      id: articleId
+                    }
+                  }
+                ]
+              });
+            }}
+            className="material-icons"
+          >
+            thumb_up
+          </i>
+          <span id="popLoginText-top" className="popLoginText">
+            <Link to="/auth/login">Login First</Link>
+          </span>
         </div>
 
         <div className="article-header-likesAndComment">
@@ -68,4 +146,4 @@ function ArticleHeader({ article, width }) {
   );
 }
 
-export default ArticleHeader;
+export default withRouter(ArticleHeader);

@@ -1,12 +1,17 @@
 import React from "react";
 import Moment from "react-moment";
 import "moment-timezone";
+import { withRouter } from "react-router-dom";
 
-function renderLatest({ latest }) {
+function renderLatest({ latest, history }) {
   return latest.map(article => (
     <div className="col s12 m12 l12 xl12 side-section-card">
       {/* <div className="row"> */}
-      <div className="col s12 m6 l6 xl6" id="side-section-card-left">
+      <div
+        className="col s12 m6 l6 xl6 pointCursor"
+        id="side-section-card-left"
+        onClick={() => history.push(`/article/${article.id}`)}
+      >
         <h6 className="bold gray zero-margin">@{article.authorId.username}</h6>
         <h6
           id="mobile-main-sec1-editorsPick-title"
@@ -33,12 +38,15 @@ function renderLatest({ latest }) {
   ));
 }
 
-function Section1({ headlines, latest, hotest }) {
+function Section1({ headlines, latest, hotest, history }) {
   let { headline1, headline2, headline3 } = headlines;
   return (
     <div className="section row col s12 m12 l12">
       <div className="row col s12 m8 l8">
-        <div className="row">
+        <div
+          className="row pointCursor"
+          onClick={() => history.push(`/article/${headline1.id}`)}
+        >
           <div className="col s12 m6 l6 xl6">
             <h5 id="mobile-main-sec1-hd1-h">{headline1.title} </h5>
             <p id="mobile-main-sec1-hd1-p">
@@ -58,7 +66,8 @@ function Section1({ headlines, latest, hotest }) {
         <div className="col s12 m12 l12 border-seperator-horizontal"></div>
         <div
           id="mobile-main-sec1-hd3"
-          className="col s12 m6 l6 right-border-seperator"
+          className="col s12 m6 l6 right-border-seperator pointCursor"
+          onClick={() => history.push(`/article/${headline2.id}`)}
         >
           <h5 id="mobile-main-sec1-hd3-h">{headline2.title}</h5>
           <p id="mobile-main-sec1-hd3-p">
@@ -69,7 +78,11 @@ function Section1({ headlines, latest, hotest }) {
             <Moment fromNow>{new Date(parseInt(headline2.createdAt))}</Moment>
           </p>
         </div>
-        <div id="mobile-main-sec1-hd3" className="col s12 m6 l6 ">
+        <div
+          id="mobile-main-sec1-hd3"
+          className="col s12 m6 l6 pointCursor"
+          onClick={() => history.push(`/article/${headline3.id}`)}
+        >
           <h5 id="mobile-main-sec1-hd3-h">
             {headline3.title.slice(0, 50)} ...
           </h5>
@@ -92,7 +105,7 @@ function Section1({ headlines, latest, hotest }) {
               >
                 Latest
               </h6>
-              {renderLatest({ latest })}
+              {renderLatest({ latest, history })}
             </div>
           </div>
         </div>
@@ -101,4 +114,4 @@ function Section1({ headlines, latest, hotest }) {
   );
 }
 
-export default Section1;
+export default withRouter(Section1);

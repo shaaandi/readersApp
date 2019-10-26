@@ -5,24 +5,29 @@ import CategoryPage from "./pages/CategoryPage";
 import ArticlePage from "./pages/ArticlePage";
 import ArticleComments from "./components/articlePage/articleComments";
 import AddComment from "./components/articlePage/articleAddComment";
-
-const Login = () => {
-  return (
-    <div>
-      <h3>Login Form</h3>
-      <input type="text" placeholder="enter your username" />
-      <button>Submit</button>
-    </div>
-  );
-};
-
+import AuthorPage from "./pages/AuthorPage";
+import AuthorAbout from "./components/authorPage/AuthorAbout";
+import AuthorArticles from "./components/authorPage/AuthorArticles";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
+import Logout from "./pages/auth/Logout";
 export default [
   {
     component: App,
     routes: [
       {
+        component: Logout,
+        path: "/logout",
+        exact: true
+      },
+      {
         component: Login,
-        path: "/login",
+        path: "/auth/login",
+        exact: true
+      },
+      {
+        component: Signup,
+        path: "/auth/signup",
         exact: true
       },
       {
@@ -48,6 +53,22 @@ export default [
                 path: "/article/:articleId/comments/addComment"
               }
             ]
+          }
+        ]
+      },
+      {
+        component: AuthorPage,
+        path: "/author/:authorId",
+        routes: [
+          {
+            component: AuthorAbout,
+            path: "/author/:authorId",
+            exact: true
+          },
+          {
+            component: AuthorArticles,
+            path: "/author/:authorId/articles",
+            exact: true
           }
         ]
       }

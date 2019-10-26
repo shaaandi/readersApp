@@ -3,11 +3,15 @@ import Moment from "react-moment";
 import "moment-timezone";
 import { withRouter } from "react-router-dom";
 
-function renderEditorsPick({ editorsPick }) {
+function renderEditorsPick({ editorsPick, history }) {
   return editorsPick.map(article => (
     <div className="col s12 m12 l12 xl12 side-section-card">
       {/* <div className="row"> */}
-      <div className="col s12 m6 l6 xl6" id="side-section-card-left">
+      <div
+        onClick={() => history.push(`/article/${article.id}`)}
+        className="col s12 m6 l6 xl6 pointCursor"
+        id="side-section-card-left"
+      >
         <h6 className="bold gray zero-margin">@{article.authorId.username}</h6>
         <h6
           id="mobile-main-sec1-editorsPick-title"
@@ -43,7 +47,7 @@ function Section1({ headlines, editorsPick, history }) {
         <div className="row">
           <div className="col s12 m12 l12">
             <div
-              className="row"
+              className="row pointCursor"
               id="mobile-main-sec1-hd1"
               onClick={() => history.push(`/article/${headline1.id}`)}
             >
@@ -71,7 +75,8 @@ function Section1({ headlines, editorsPick, history }) {
           <div className="col s12 m12 l12 border-seperator-horizontal"></div>
           <div
             id="mobile-main-sec1-hd3"
-            className="col s12 m6 l6 right-border-seperator"
+            className="col s12 m6 l6 right-border-seperator pointCursor"
+            onClick={() => history.push(`/article/${headline3.id}`)}
           >
             <h5 id="mobile-main-sec1-hd3-h">
               {headline3.title.slice(0, 50)} ...
@@ -86,7 +91,11 @@ function Section1({ headlines, editorsPick, history }) {
           </div>
           <div className="col s12 m6 l6">
             <div className="row">
-              <div id="mobile-main-sec1-hd4" className="col s12 m12 l12">
+              <div
+                id="mobile-main-sec1-hd4"
+                className="col s12 m12 l12 pointCursor"
+                onClick={() => history.push(`/article/${headline4.id}`)}
+              >
                 <h5 id="mobile-main-sec1-hd4-h">
                   {headline4.title.slice(0, 50)} ...
                 </h5>
@@ -94,7 +103,11 @@ function Section1({ headlines, editorsPick, history }) {
                   {new Date(parseInt(headline4.createdAt))}
                 </Moment>
               </div>
-              <div id="mobile-main-sec1-hd5" className="col s12 m12 l12">
+              <div
+                onClick={() => history.push(`/article/${headline5.id}`)}
+                id="mobile-main-sec1-hd5"
+                className="col s12 m12 l12 pointCursor"
+              >
                 <h5 id="mobile-main-sec1-hd5-h">
                   {headline5.title.slice(0, 50)} ...
                 </h5>
@@ -107,7 +120,11 @@ function Section1({ headlines, editorsPick, history }) {
           <div className="col s12 m12 l12 border-seperator-horizontal"></div>
           <div className="col s12 m12 l12">
             <div className="row">
-              <div id="mobile-main-sec1-hd2" className="col s12 m6 l6 xl6">
+              <div
+                onClick={() => history.push(`/article/${headline2.id}`)}
+                id="mobile-main-sec1-hd2"
+                className="col s12 m6 l6 xl6 pointCursor"
+              >
                 <h5 id="mobile-main-sec1-hd2-h">
                   {headline2.title.slice(0, 50)} ...
                 </h5>
@@ -140,7 +157,7 @@ function Section1({ headlines, editorsPick, history }) {
               >
                 Editors' Pick
               </h6>
-              {renderEditorsPick({ editorsPick })}
+              {renderEditorsPick({ editorsPick, history })}
             </div>
           </div>
         </div>

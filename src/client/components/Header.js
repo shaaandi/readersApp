@@ -9,26 +9,54 @@ function closeSideNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
 
+// later we will check wheather the user is oauth or local, and then
+// [present the appropirate logout button.]
+
 function renderUserOptions({ currentUser }) {
-  if (currentUser) {
+  if (!currentUser) {
     return [
       <li>
-        <Link to="/">Dashboard</Link>
+        <Link onClick={() => closeSideNav()} to="/auth/login">
+          Login
+        </Link>
       </li>,
       <li>
-        <Link to="/">Subscribe</Link>
+        <Link onClick={() => closeSideNav()} to="/auth/signup">
+          Signup
+        </Link>
+      </li>
+    ];
+  }
+
+  if (currentUser.id) {
+    return [
+      <li>
+        <Link onClick={() => closeSideNav()} to="/">
+          Dashboard
+        </Link>
       </li>,
       <li>
-        <Link to="/">Logout</Link>
+        <Link onClick={() => closeSideNav()} to="/">
+          Subscribe
+        </Link>
+      </li>,
+      <li>
+        <Link onClick={() => closeSideNav()} to="/logout">
+          Logout
+        </Link>
       </li>
     ];
   } else {
     return [
       <li>
-        <Link to="/">Login</Link>
+        <Link onClick={() => closeSideNav()} to="/auth/login">
+          Login
+        </Link>
       </li>,
       <li>
-        <Link to="/">Signup</Link>
+        <Link onClick={() => closeSideNav()} to="/auth/signup">
+          Signup
+        </Link>
       </li>
     ];
   }
@@ -58,6 +86,7 @@ function renderCategoriesNav({ location }) {
 
 function Header(props) {
   let { currentUser, location } = props;
+
   return [
     <nav id="nav-extended-custom" className="nav-extended">
       <div className="nav-wrapper">
@@ -89,9 +118,13 @@ function Header(props) {
     //   </li>
     // </ul>
     <ul id="mySidenav" className="sidenav-w">
-      <a href="#" className="closebtn" onClick={() => closeSideNav()}>
+      <button
+        id="header-mobile-sidenav-closebtn"
+        className="closebtn"
+        onClick={() => closeSideNav()}
+      >
         &times;
-      </a>
+      </button>
       {renderUserOptions({ currentUser })}
     </ul>
   ];

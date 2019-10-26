@@ -4,21 +4,24 @@ module.exports = {
   article: gql`
     query article($id: ID!) {
       article(id: $id) {
-        id
-        title
-        content
-        createdAt
-        authorId {
+        article {
           id
-          username
-          profileImg
+          title
+          content
+          createdAt
+          authorId {
+            id
+            username
+            profileImg
+          }
+          likes {
+            id
+          }
+          comments {
+            id
+          }
         }
-        likes {
-          id
-        }
-        comments {
-          id
-        }
+        isLiked
       }
     }
   `

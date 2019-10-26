@@ -4,14 +4,16 @@ module.exports = {
   fetchComments: gql`
     query article($id: ID!) {
       article(id: $id) {
-        id
-        comments {
+        article {
           id
-          content
-          readerId {
+          comments {
             id
-            username
-            profileImg
+            content
+            readerId {
+              id
+              username
+              profileImg
+            }
           }
         }
       }
