@@ -35,13 +35,11 @@ function ArticlePage({ match, route, user }) {
     };
   });
 
-  console.log(data, loading, error);
-
   if (loading) {
     return (
       <div id="custom-loader">
-        <div class="progress">
-          <div class="indeterminate"></div>
+        <div className="progress">
+          <div className="indeterminate"></div>
         </div>
       </div>
     );

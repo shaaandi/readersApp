@@ -30,30 +30,30 @@ function renderUserOptions({ currentUser }) {
 
   if (currentUser.id) {
     return [
-      <li>
+      <li key={0}>
         <Link onClick={() => closeSideNav()} to="/">
           Dashboard
         </Link>
       </li>,
-      <li>
+      <li key={1}>
         <Link onClick={() => closeSideNav()} to="/">
           Subscribe
         </Link>
       </li>,
-      <li>
-        <Link onClick={() => closeSideNav()} to="/logout">
+      <li key={2}>
+        <Link onClick={() => closeSideNav()} to="/logout" replace>
           Logout
         </Link>
       </li>
     ];
   } else {
     return [
-      <li>
+      <li key={0}>
         <Link onClick={() => closeSideNav()} to="/auth/login">
           Login
         </Link>
       </li>,
-      <li>
+      <li key={1}>
         <Link onClick={() => closeSideNav()} to="/auth/signup">
           Signup
         </Link>
@@ -75,7 +75,7 @@ function renderCategoriesNav({ location }) {
   ];
   return categories.map(cat => {
     return (
-      <Link to={`/${cat}`}>
+      <Link key={cat} to={`/${cat}`}>
         <li className="tab">
           {current == cat ? <a className="active">{cat}</a> : <a>{cat}</a>}
         </li>
@@ -88,7 +88,7 @@ function Header(props) {
   let { currentUser, location } = props;
 
   return [
-    <nav id="nav-extended-custom" className="nav-extended">
+    <nav key={0} id="nav-extended-custom" className="nav-extended">
       <div className="nav-wrapper">
         <Link to="/" className="brand-logo" id="gothamTimesLogo">
           Inside Los Angeles
@@ -117,7 +117,7 @@ function Header(props) {
     //     <a href="collapsible.html">JavaScript</a>
     //   </li>
     // </ul>
-    <ul id="mySidenav" className="sidenav-w">
+    <ul key={1} id="mySidenav" className="sidenav-w">
       <button
         id="header-mobile-sidenav-closebtn"
         className="closebtn"

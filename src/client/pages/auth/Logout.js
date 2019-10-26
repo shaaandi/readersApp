@@ -29,7 +29,7 @@ function Logout({ history }) {
   }, [onMount]);
 
   if (logoutMutationResponse) {
-    history.push("/");
+    history.replace("/");
   }
 
   if (logoutMutationLoading) {

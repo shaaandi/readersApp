@@ -8,7 +8,6 @@ import { likeArticle } from "./../../mutations/article/like";
 import { article as articleQuery } from "../../queries/articlePage";
 
 function ArticleHeader({ article, isLiked, user }) {
-  console.log(user, "article-header");
   let [
     mutateLikeArticle,
     {

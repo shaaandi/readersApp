@@ -19,14 +19,13 @@ function App(props) {
   if (loading) {
     return (
       <div id="custom-loader">
-        <div class="progress">
-          <div class="indeterminate"></div>
+        <div className="progress">
+          <div className="indeterminate"></div>
         </div>
       </div>
     );
   }
 
-  console.log(data, "app console");
   let { currentUser: user } = data;
   return (
     <div className="container-fluid">

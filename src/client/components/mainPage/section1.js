@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 
 function renderEditorsPick({ editorsPick, history }) {
   return editorsPick.map(article => (
-    <div className="col s12 m12 l12 xl12 side-section-card">
+    <div key={article.id} className="col s12 m12 l12 xl12 side-section-card">
       {/* <div className="row"> */}
       <div
         onClick={() => history.push(`/article/${article.id}`)}
