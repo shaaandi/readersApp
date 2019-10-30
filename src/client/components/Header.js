@@ -31,7 +31,11 @@ function renderUserOptions({ currentUser }) {
   if (currentUser.id) {
     return [
       <li key={0}>
-        <Link onClick={() => closeSideNav()} to="/">
+        <Link
+          onClick={() => closeSideNav()}
+          to="/management/search"
+          // to="/management/search?searchType=byTitle&query=SSL&pageNum=1&sortField=createdAt&sortOrder=Asc"
+        >
           Dashboard
         </Link>
       </li>,

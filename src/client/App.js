@@ -2,17 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { renderRoutes } from "react-router-config";
-import { Link } from "react-router-dom";
 import Header from "./components/Header";
-
 import { fetchCurrentUser } from "./queries/auth";
 
 function App(props) {
   let [onMount] = useState(0);
   let { route, location } = props;
-  useEffect(() => {
-    // adding materialize image media listenier
-  }, [onMount]);
 
   let { data, loading, error } = useQuery(fetchCurrentUser);
 
@@ -36,3 +31,8 @@ function App(props) {
 }
 
 export default App;
+
+// Important Notes to consider :
+
+// 1) The serch Article functionality is currently not working very well .
+// Not sorting in accordance with filter

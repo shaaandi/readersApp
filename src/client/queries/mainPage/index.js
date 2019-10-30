@@ -72,6 +72,7 @@ module.exports = {
           createdAt
           authorId {
             username
+            id
           }
         }
       }

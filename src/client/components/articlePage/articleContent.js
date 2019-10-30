@@ -12,6 +12,10 @@ function ArticleContent({ article }) {
   return (
     <div className="col s12 m12 l12">
       <img
+        onClick={e => {
+          var instance = M.Materialbox.getInstance(e.target);
+          instance.open();
+        }}
         className="materialboxed"
         src="https://cdn.pixabay.com/photo/2019/09/28/00/36/plow-4509660_960_720.jpg"
         width={500}

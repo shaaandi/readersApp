@@ -11,10 +11,16 @@ import AuthorArticles from "./components/authorPage/AuthorArticles";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Logout from "./pages/auth/Logout";
+import ReplaceArticle from "./pages/management/ReplaceArticle";
 export default [
   {
     component: App,
     routes: [
+      {
+        component: ReplaceArticle,
+        path: "/management/manage/templete/replace",
+        exact: true
+      },
       {
         component: Logout,
         path: "/logout",

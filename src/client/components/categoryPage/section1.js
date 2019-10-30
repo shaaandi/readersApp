@@ -1,7 +1,24 @@
 import React from "react";
 import Moment from "react-moment";
 import "moment-timezone";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
+
+function articleManageOptions({ pageT, section, indexInSection = null, user }) {
+  // enum refetch Queries = fetchCategoryLatest fetchCategoryTemplete
+  if (!user) return;
+  if (user.badge !== "CONTENT_MANAGER") return;
+  let editLink = `/management/manage/templete/replace?pageT=${pageT}&section=${section}`;
+  if (indexInSection !== null) editLink += `&indexInSection=${indexInSection}`;
+  editLink += `&refetchQueries=fetchCategoryTemplete`;
+  return (
+    <div className="col s12 m12 l12 right-align">
+      {/* content manager buttons are shown here */}
+      <Link to={editLink}>
+        <i class="material-icons">create</i>
+      </Link>
+    </div>
+  );
+}
 
 function renderLatest({ latest, history }) {
   return latest.map(article => (
@@ -38,16 +55,21 @@ function renderLatest({ latest, history }) {
   ));
 }
 
-function Section1({ headlines, latest, hotest, history }) {
+function Section1({ headlines, latest, hotest, history, user, categoryName }) {
   let { headline1, headline2, headline3 } = headlines;
   return (
     <div className="section row col s12 m12 l12">
       <div className="row col s12 m8 l8">
-        <div
-          className="row pointCursor"
-          onClick={() => history.push(`/article/${headline1.id}`)}
-        >
-          <div className="col s12 m6 l6 xl6">
+        <div className="row pointCursor">
+          {articleManageOptions({
+            pageT: categoryName,
+            section: "headline1",
+            user
+          })}
+          <div
+            onClick={() => history.push(`/article/${headline1.id}`)}
+            className="col s12 m6 l6 xl6"
+          >
             <h5 id="mobile-main-sec1-hd1-h">{headline1.title} </h5>
             <p id="mobile-main-sec1-hd1-p">
               {headline1.content[0].slice(0, 305)}
@@ -67,32 +89,47 @@ function Section1({ headlines, latest, hotest, history }) {
         <div
           id="mobile-main-sec1-hd3"
           className="col s12 m6 l6 right-border-seperator pointCursor"
-          onClick={() => history.push(`/article/${headline2.id}`)}
         >
-          <h5 id="mobile-main-sec1-hd3-h">{headline2.title}</h5>
-          <p id="mobile-main-sec1-hd3-p">
-            {headline2.content[0].slice(0, 305)}
-          </p>
+          {articleManageOptions({
+            pageT: categoryName,
+            section: "headline2",
+            user
+          })}
+          <div
+            onClick={() => history.push(`/article/${headline2.id}`)}
+            className="row"
+          >
+            <h5 id="mobile-main-sec1-hd3-h">{headline2.title}</h5>
+            <p id="mobile-main-sec1-hd3-p">
+              {headline2.content[0].slice(0, 305)}
+            </p>
 
-          <p>
-            <Moment fromNow>{new Date(parseInt(headline2.createdAt))}</Moment>
-          </p>
+            <p>
+              <Moment fromNow>{new Date(parseInt(headline2.createdAt))}</Moment>
+            </p>
+          </div>
         </div>
-        <div
-          id="mobile-main-sec1-hd3"
-          className="col s12 m6 l6 pointCursor"
-          onClick={() => history.push(`/article/${headline3.id}`)}
-        >
-          <h5 id="mobile-main-sec1-hd3-h">
-            {headline3.title.slice(0, 50)} ...
-          </h5>
-          <p id="mobile-main-sec1-hd3-p">
-            {headline3.content[0].slice(0, 305)}
-          </p>
+        <div id="mobile-main-sec1-hd3" className="col s12 m6 l6 pointCursor">
+          {articleManageOptions({
+            pageT: categoryName,
+            section: "headline3",
+            user
+          })}
+          <div
+            onClick={() => history.push(`/article/${headline3.id}`)}
+            className="row"
+          >
+            <h5 id="mobile-main-sec1-hd3-h">
+              {headline3.title.slice(0, 50)} ...
+            </h5>
+            <p id="mobile-main-sec1-hd3-p">
+              {headline3.content[0].slice(0, 305)}
+            </p>
 
-          <p>
-            <Moment fromNow>{new Date(parseInt(headline3.createdAt))}</Moment>
-          </p>
+            <p>
+              <Moment fromNow>{new Date(parseInt(headline3.createdAt))}</Moment>
+            </p>
+          </div>
         </div>
       </div>
       <div className="col s12 m12 l4 xl4 ">

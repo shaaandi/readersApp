@@ -3,7 +3,7 @@ import { fetchHeadlines, fetchEditorsPick } from "../queries/mainPage/index";
 import { useQuery } from "@apollo/react-hooks";
 import Section1 from "../components/mainPage/section1";
 
-function MainPage() {
+function MainPage({ user }) {
   let {
     data: headlines,
     loading: fetchHeadlinesLoading,
@@ -21,11 +21,18 @@ function MainPage() {
         <div className="indeterminate"></div>
       </div>
     );
+
+  if (fetchHeadlinesError || fetchEditorsPickError) {
+    return <div>Something went wrong .</div>;
+  }
+
+  let { fetchMainTemplete } = headlines;
   return (
     <div className="container-fluid">
       <Section1
-        headlines={headlines.fetchMainTemplete}
+        headlines={fetchMainTemplete}
         editorsPick={editorsPick.fetchMainTemplete.editorsPick}
+        user={user}
       />
     </div>
   );

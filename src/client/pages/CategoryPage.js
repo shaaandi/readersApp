@@ -9,7 +9,7 @@ import {
 
 import Section1 from "../components/categoryPage/section1";
 
-function CategoryPage({ location }) {
+function CategoryPage({ location, user }) {
   let categoryName = location.pathname.slice(1);
   let {
     data: headlines,
@@ -59,6 +59,8 @@ function CategoryPage({ location }) {
         headlines={headlines.fetchCategoryTemplete}
         latest={latest.fetchCategoryLatest}
         hotest={hotest.fetchCategoryHot}
+        user={user}
+        categoryName={categoryName}
       />
     </div>
   );

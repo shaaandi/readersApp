@@ -56,6 +56,7 @@ function Html({ content, state, DOMAIN }) {
         />
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <script src="main.bundle.js"></script>
+        <script type="text/javascript" src="materializeCustom.js"></script>
       </body>
     </html>
   );
