@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import { renderRoutes } from "react-router-config";
 import Header from "./components/Header";
 import { fetchCurrentUser } from "./queries/auth";

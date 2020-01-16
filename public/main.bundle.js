@@ -66050,10 +66050,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactHooks = __webpack_require__(4);
 
-var _graphqlTag = __webpack_require__(5);
-
-var _graphqlTag2 = _interopRequireDefault(_graphqlTag);
-
 var _reactRouterConfig = __webpack_require__(12);
 
 var _Header = __webpack_require__(224);

@@ -18,7 +18,7 @@ function Html({ content, state, DOMAIN }) {
       <head>
         <title>Inside L.A</title>
 
-        <base href={DOMAIN} />
+        {/* <base href={DOMAIN} /> */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -73,14 +73,15 @@ app.use(express.static("public"));
 
 // setting enviroment variables ;
 const PORT = process.env.PORT || 3100;
-const DOMAIN = process.env.DOMAIN || `http://localhost:${PORT}/`;
-
+// const DOMAIN = process.env.DOMAIN || `http://localhost:${PORT}/`;
+const graphqlURI = process.env.GRAPHQLURI || 'http://localhost:4000/graphql'
+// uri: "https://young-island-99676.herokuapp.com/graphql",
 app.use((req, res) => {
   // ssr
   const client = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
-      uri: "http://localhost:4000/graphql",
+      uri: graphqlURI,
       credentials: "include",
       headers: {
         cookie: req.header("Cookie")
@@ -107,7 +108,7 @@ app.use((req, res) => {
     const initialState = client.extract();
 
     const html = (
-      <Html content={content} state={initialState} DOMAIN={DOMAIN} />
+      <Html content={content} state={initialState} DOMAIN={''} />
     );
 
     res.status(200);

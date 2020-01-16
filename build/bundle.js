@@ -349,7 +349,6 @@ function Html(_ref) {
         null,
         "Inside L.A"
       ),
-      _react2.default.createElement("base", { href: DOMAIN }),
       _react2.default.createElement("meta", { name: "viewport", content: "width=device-width, initial-scale=1.0" }),
       _react2.default.createElement("link", {
         href: "https://fonts.googleapis.com/icon?family=Material+Icons",
@@ -402,14 +401,15 @@ app.use(_express2.default.static("public"));
 
 // setting enviroment variables ;
 var PORT = process.env.PORT || 3100;
-var DOMAIN = process.env.DOMAIN || "http://localhost:" + PORT + "/";
-
+// const DOMAIN = process.env.DOMAIN || `http://localhost:${PORT}/`;
+var graphqlURI = process.env.GRAPHQLURI || 'http://localhost:4000/graphql';
+// uri: "https://young-island-99676.herokuapp.com/graphql",
 app.use(function (req, res) {
   // ssr
   var client = new _apolloClient.ApolloClient({
     ssrMode: true,
     link: (0, _apolloLinkHttp.createHttpLink)({
-      uri: "http://localhost:4000/graphql",
+      uri: graphqlURI,
       credentials: "include",
       headers: {
         cookie: req.header("Cookie")
@@ -437,7 +437,7 @@ app.use(function (req, res) {
     var content = (0, _server.renderToString)(App);
     var initialState = client.extract();
 
-    var html = _react2.default.createElement(Html, { content: content, state: initialState, DOMAIN: DOMAIN });
+    var html = _react2.default.createElement(Html, { content: content, state: initialState, DOMAIN: '' });
 
     res.status(200);
     res.send("<!doctype html>\n" + (0, _server.renderToStaticMarkup)(html));
@@ -694,10 +694,6 @@ var _react = __webpack_require__(0);
 var _react2 = _interopRequireDefault(_react);
 
 var _reactHooks = __webpack_require__(2);
-
-var _graphqlTag = __webpack_require__(3);
-
-var _graphqlTag2 = _interopRequireDefault(_graphqlTag);
 
 var _reactRouterConfig = __webpack_require__(4);
 

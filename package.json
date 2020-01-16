@@ -1,14 +1,24 @@
 {
-  "name": "readersapp",
+  "name": "inside la",
   "version": "1.0.0",
   "description": "Readers App for the news paper app .",
   "main": "index.js",
+  "engines": {
+    "node" : "12.13.1",
+    "npm" : "6.12.1"
+  },
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
     "dev:server": "nodemon build/bundle.js",
     "dev:build-server": "webpack --config webpack.server.js --watch",
     "dev:build-client": "webpack --config webpack.client.js --watch",
-    "dev:build-custom": "webpack --config webpack.customAsset.js --watch"
+    "dev:build-custom": "webpack --config webpack.customAsset.js --watch",
+    "prod": "npm-run-all --parallel prod:*",
+    "prod:build-server": "webpack --config webpack.server.js",
+    "prod:build-client": "webpack --config webpack.client.js",
+    "prod:build-custom": "webpack --config webpack.customAsset.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run prod",
+    "start" : "node build/bundle.js"
   },
   "repository": {
     "type": "git",
