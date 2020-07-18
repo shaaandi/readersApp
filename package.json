@@ -56,7 +56,7 @@
     "express-http-proxy": "1.0.6",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
-    "lodash": "4.17.4",
+    "lodash": "4.17.19",
     "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
