@@ -1,37 +1,32 @@
-import React, {  useState } from "react";
-import { useQuery } from "@apollo/react-hooks";
-import { renderRoutes } from "react-router-config";
-import Header from "./components/Header";
-import { fetchCurrentUser } from "./queries/auth";
+import React, { useState } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { renderRoutes } from 'react-router-config';
+import Header from './components/Header';
+import { fetchCurrentUser } from './queries/auth';
 
 function App(props) {
-  let [onMount] = useState(0);
-  let { route, location } = props;
+    let [onMount] = useState(0);
+    let { route, location } = props;
 
-  let { data, loading, error } = useQuery(fetchCurrentUser);
+    let { data, loading, error } = useQuery(fetchCurrentUser);
 
-  if (loading) {
+    if (loading) {
+        return (
+            <div id="custom-loader">
+                <div className="progress">
+                    <div className="indeterminate"></div>
+                </div>
+            </div>
+        );
+    }
+
+    let { currentUser: user } = data;
     return (
-      <div id="custom-loader">
-        <div className="progress">
-          <div className="indeterminate"></div>
+        <div className="container-fluid">
+            <Header currentUser={data.currentUser} location={location} />
+            {renderRoutes(route.routes, { user })}
         </div>
-      </div>
     );
-  }
-
-  let { currentUser: user } = data;
-  return (
-    <div className="container-fluid">
-      <Header currentUser={data.currentUser} location={location} />
-      {renderRoutes(route.routes, { user })}
-    </div>
-  );
 }
 
 export default App;
-
-// Important Notes to consider :
-
-// 1) The serch Article functionality is currently not working very well .
-// Not sorting in accordance with filter
